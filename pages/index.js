@@ -49,7 +49,6 @@ export default function Home() {
                   className="bg-white w-full flex flex-col items-center justify-center w-36  h-24 rounded-2xl   bg-slate-50   transition-all   hover:scale-105 cursor-pointer        "
                 >
                   <Image
-                    style="width: 100px; height: auto;"
                     src={item.url}
                     alt="item"
                     className="  h-[40%]  object-contain "
