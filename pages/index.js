@@ -1,19 +1,39 @@
 import Map from "./components/Map";
 import Image from "next/image";
-import logo from "../public/logo.png";
-import camry from "../public/camry.png";
-import bicycle from "../public/bicycle.jpeg";
-import reserve from "../public/reserve.png";
+import logo from "../public/images/logo.png";
+import camry from "../public/images/camry.png";
+import bicycle from "../public/images/bicycle.jpeg";
+import reserve from "../public/images/reserve.png";
 
-import avatar22 from "../public/images/avatar22.png";
 import Link from "next/link";
 
+import { auth } from "../firebase";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 const data = [
   { url: camry, title: "Ride" },
   { url: bicycle, title: "2-Wheels" },
   { url: reserve, title: "Reserve" },
 ];
 export default function Home() {
+  const [inputValue, setInputValue] = useState("");
+  const [user, setUser] = useState();
+  const router = useRouter();
+
+  useEffect(() => {
+    return onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser({
+          name: user.displayName,
+          photoURL: user.photoURL,
+        });
+      } else {
+        setUser(null);
+        router.push("/login");
+      }
+    });
+  }, []);
   return (
     <div className="flex flex-col h-screen ">
       <Map />
@@ -21,9 +41,14 @@ export default function Home() {
         <div className="flex justify-between items-center pt-8 ">
           <Image src={logo} alt="logo" className="rounded-full w-20  " />
           <div className="flex items-center gap-5">
-            <h2 className="ml-10  ">Taxi Driver</h2>
+            <h2 className="ml-10 text-white font-bold ">{user && user.name}</h2>
             <div className="w-10 h-10 rounded-full ">
-              <Image src={avatar22} alt="avatar" className="rounded-full" />
+              <img
+                src={user && user.photoURL}
+                alt="avatar"
+                className="rounded-full cursor-pointer"
+                onClick={() => signOut(auth)}
+              />
             </div>
           </div>
         </div>
@@ -31,7 +56,13 @@ export default function Home() {
           {data.map((item, index) => {
             if (index == 0) {
               return (
-                <Link href="/search" key={index}>
+                <Link
+                  href={{
+                    pathname: "/search",
+                    query: { inputValue: inputValue },
+                  }}
+                  key={index}
+                >
                   <div className="bg-white w-full flex flex-col items-center justify-center w-36  h-24 rounded-2xl   bg-slate-50   transition-all   hover:scale-105 cursor-pointer        ">
                     <Image
                       src={item.url}
@@ -61,6 +92,7 @@ export default function Home() {
         </div>
         <div className="w-full bg-white rounded-2xl   h-16  ">
           <input
+            onChange={(e) => setInputValue(e.target.value)}
             type="text "
             className="w-full h-full bg placeholder:text-slate-700 placeholder:font-bold px-6 border-none rounded-2xl"
             placeholder="Where to?"

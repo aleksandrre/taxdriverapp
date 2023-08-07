@@ -3,9 +3,14 @@ import WestIcon from "@mui/icons-material/West";
 import AddIcon from "@mui/icons-material/Add";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 function search() {
+  const router = useRouter();
+  const { inputValue } = router.query;
   const [pickup, setPickup] = useState("");
-  const [dropoff, setDropoff] = useState("");
+  const [dropoff, setDropoff] = useState(inputValue);
+  // console.log(x);
 
   return (
     <div className="w-full p-5 bg-whiteh-96 flex flex-col  ">

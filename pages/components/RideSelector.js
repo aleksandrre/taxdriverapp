@@ -49,7 +49,7 @@ function RideSelector({ pickupx, dropoffx }) {
           ))}
         </div>
 
-        <div className="w-full h-14 bg-black text-white flex justify-center items-center  ">
+        <div className="w-full h-14 bg-black text-white flex justify-center items-center cursor-pointer mt-2  ">
           Confirm UberX
         </div>
       </div>
