@@ -37,19 +37,24 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen ">
       <Map />
-      <div className="flex-1  px-5  bg-slate-500    ">
-        <div className="flex justify-between items-center pt-8 ">
+      <div className="flex-1  px-5  bg-slate-500 relative   ">
+        <div className="flex justify-between items-center pt-9 ">
           <Image src={logo} alt="logo" className="rounded-full w-20  " />
-          <div className="flex items-center gap-5">
-            <h2 className="ml-10 text-white font-bold ">{user && user.name}</h2>
+          <div className="flex flex-col items-center   gap-2 ">
+            <h2 className=" text-white font-bold ">{user && user.name}</h2>
             <div className="w-10 h-10 rounded-full ">
               <img
                 src={user && user.photoURL}
                 alt="avatar"
                 className="rounded-full cursor-pointer"
-                onClick={() => signOut(auth)}
               />
             </div>
+          </div>
+          <div
+            onClick={() => signOut(auth)}
+            className="   text-white font-bold flex justify-center items-center bg-slate-700 p-2 cursor-pointer rounded-lg hover:bg-slate-50 hover:text-black "
+          >
+            sign out
           </div>
         </div>
         <div className="flex justify-between  gap-3 py-7 ">
