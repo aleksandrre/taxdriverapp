@@ -68,7 +68,7 @@ export default function Home() {
                   }}
                   key={index}
                 >
-                  <div className="bg-white w-full flex flex-col items-center justify-center w-36  h-24 rounded-2xl   bg-slate-50   transition-all   hover:scale-105 cursor-pointer        ">
+                  <div className="bg-white w-full flex flex-col items-center justify-center w-36  h-24 rounded-2xl   bg-slate-50   transition-all   hover:scale-105 cursor-pointer md:hover:scale-95       ">
                     <Image
                       src={item.url}
                       alt="item"
@@ -82,7 +82,7 @@ export default function Home() {
               return (
                 <div
                   key={index}
-                  className="bg-white w-full flex flex-col items-center justify-center w-36  h-24 rounded-2xl   bg-slate-50   transition-all   hover:scale-105 cursor-pointer        "
+                  className="bg-white w-full flex flex-col items-center justify-center w-36  h-24 rounded-2xl   bg-slate-50   transition-all   hover:scale-105 cursor-pointer  md:hover:scale-95       "
                 >
                   <Image
                     src={item.url}
